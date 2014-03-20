@@ -1,6 +1,8 @@
 package cl.experti.harkonnen.portal.jsf;
 
-import cl.experti.harkonnen.servicio.ServicioAutenticacion;
+import cl.experti.harkonnen.portal.servicio.ServicioAutenticacion;
+import cl.experti.harkonnen.portal.utils.FacesUtils;
+import cl.experti.harkonnen.servicio.ServicioAcceso;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.Resource;
@@ -61,6 +63,8 @@ public class LoginBean implements Serializable {
                         (ServletResponse) context.getResponse());
 
                 FacesContext.getCurrentInstance().responseComplete();
+            } else {
+                FacesUtils.errorMessage("usuarioInvalido");
             }
         } catch (Exception e) {
             logger.error("Problema al hacer login: {}", e.toString());

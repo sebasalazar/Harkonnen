@@ -56,7 +56,20 @@ public abstract class SecurityUtils implements Serializable {
         String resultado = "";
         try {
             if (!StringUtils.isEmpty(texto)) {
-                resultado = DigestUtils.shaHex(texto);
+                resultado = DigestUtils.sha1Hex(texto);
+            }
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+        return resultado;
+    }
+    
+    public static String digestMd5(String texto) {
+        String resultado = "";
+        try {
+            if (!StringUtils.isEmpty(texto)) {
+                byte[] md5 = DigestUtils.md5(texto);
+                resultado = DigestUtils.md5Hex(texto);
             }
         } catch (Exception e) {
             logger.error(e.toString());

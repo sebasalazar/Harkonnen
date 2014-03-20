@@ -18,4 +18,6 @@ public interface ServicioAcceso {
     public Acceso guardar(Acceso acceso);
 
     public boolean eliminar(Acceso acceso);
+    
+    public boolean autenticar(String usuario, String password);
 }

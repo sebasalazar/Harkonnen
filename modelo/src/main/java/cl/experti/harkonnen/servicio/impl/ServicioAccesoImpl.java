@@ -1,6 +1,8 @@
 package cl.experti.harkonnen.servicio.impl;
 
+import cl.experti.harkonnen.ldap.UsuarioRepository;
 import cl.experti.harkonnen.modelo.Acceso;
+import cl.experti.harkonnen.modelo.Usuario;
 import cl.experti.harkonnen.repository.AccesoRepository;
 import cl.experti.harkonnen.servicio.ServicioAcceso;
 import java.io.Serializable;
@@ -22,6 +24,8 @@ public class ServicioAccesoImpl implements ServicioAcceso, Serializable {
 
     @Resource(name = "accesoRepository")
     private AccesoRepository accesoRepository;
+    @Resource(name = "usuarioRepository")
+    private UsuarioRepository usuarioRepository;
     private static final Logger logger = LoggerFactory.getLogger(ServicioAccesoImpl.class);
 
     @Override
@@ -97,6 +101,24 @@ public class ServicioAccesoImpl implements ServicioAcceso, Serializable {
         } catch (Exception e) {
             logger.error("Error al eliminar: {}", e.toString());
             logger.debug("Error al eliminar: ", e);
+        }
+        return resultado;
+    }
+
+    @Override
+    public boolean autenticar(String usuario, String password) {
+        boolean resultado = false;
+        try {
+            if (StringUtils.isNotBlank(usuario)) {
+                Usuario empleado = usuarioRepository.findByUsuario(usuario);
+                if (empleado != null) {
+                    resultado = StringUtils.equals(password, empleado.getPassword());
+                }
+            }
+        } catch (Exception e) {
+            resultado = false;
+            logger.error("Error de autenticacion: {}", e.toString());
+            logger.debug("Error de autenticacion: ", e);
         }
         return resultado;
     }

@@ -8,27 +8,7 @@
         <ui:define name="body">
 
             <p:outputPanel id="indexBean" layout="block">
-                <p:panel header="#{indexBean.nombre}">
-                    <h:panelGrid style="border: none;" columns="2">
-                        <p:outputPanel>
-                            <h:outputText value="${msg.saludoInicio}" />
-                        </p:outputPanel>
-                        <p:outputPanel>
-                            <h:form id="menuIndex">
-                                <p:messages globalOnly="true" showDetail="false" showSummary="true" />
-                                <p:menu>
-                                    <p:submenu label="#{indexBean.rut}">
-                                        <p:menuitem value="${msg.pedirCuenta}" action="#{indexBean.pedirCuenta}" icon="ui-icon-person" update=":menuIndex" rendered="#{!indexBean.peticionCreada and !indexBean.usuarioCreado}" />
-                                        <p:menuitem value="${msg.confirmarCuenta}" action="#{indexBean.confirmarCuenta}" icon="ui-icon-check" update=":menuIndex" rendered="#{indexBean.peticionCreada and !indexBean.usuarioCreado}" />
-                                        <p:menuitem value="${msg.detalleCuenta}" action="#{indexBean.miCuenta}" icon="ui-icon-contact" update=":menuIndex" />
-                                        <p:menuitem value="${msg.actualizarDatos}" action="#{indexBean.misDatos}" icon="ui-icon-pencil" update=":menuIndex" />
-                                    </p:submenu>
-                                </p:menu>
-                            </h:form>
-                        </p:outputPanel>
-                    </h:panelGrid>
-
-                </p:panel>
+                Hola
             </p:outputPanel>
 
         </ui:define>

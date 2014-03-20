@@ -1,15 +1,19 @@
 package cl.experti.harkonnen.modelo;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@experti.cl>
  */
-public class TipoKCC extends BaseBean {
+@Entity
+@Table(name = "tipos_kcc")
+public class TipoKcc extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

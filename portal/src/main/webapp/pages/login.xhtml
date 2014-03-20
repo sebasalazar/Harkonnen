@@ -11,19 +11,23 @@
             <h:form>
                 <p:panel header="${msg.tituloLogin}">
                     <h:panelGrid columns="3" style="border: none;">
-                        
+
                         <p:outputLabel for="usuario" value="${msg.usuarioLabel}" />
                         <p:inputText id="usuario" value="#{loginBean.username}" />
                         <p:message for="usuario" />
-                        
+
                         <p:outputLabel for="password" value="${msg.passwordLabel}" />
                         <p:password id="password" value="#{loginBean.password}" />
                         <p:message for="password" />
-                        
+
                     </h:panelGrid>
-                    
+
+                    <p:messages globalOnly="true" showDetail="false" showSummary="true" />
+
+                    <p:separator />
+
                     <p:commandButton action="#{loginBean.doLogin}" value="${msg.loginLabel}" ajax="false" />
-                    
+
                 </p:panel>
             </h:form>
 

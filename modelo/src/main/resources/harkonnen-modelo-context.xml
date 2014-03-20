@@ -82,6 +82,7 @@
     <ldap:repositories base-package="cl.experti.harkonnen.ldap" />
     
     <!-- Envío de mail -->
+    <!--
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="defaultEncoding" value="UTF-8" />
         <property name="host" value="${mail.host}" />
@@ -95,4 +96,5 @@
             </props>
         </property>
     </bean>
+    -->
 </beans>

@@ -1,7 +1,7 @@
 package cl.experti.harkonnen.servicio;
 
-import cl.experti.harkonnen.modelo.KCC;
-import cl.experti.harkonnen.modelo.TipoKCC;
+import cl.experti.harkonnen.modelo.Kcc;
+import cl.experti.harkonnen.modelo.TipoKcc;
 import java.util.List;
 
 /**
@@ -10,25 +10,25 @@ import java.util.List;
  */
 public interface ServicioKCC {
 
-    public TipoKCC getTipoKCC(Integer id);
+    public TipoKcc getTipoKCC(Integer id);
 
-    public List<TipoKCC> getTiposKCCs();
+    public List<TipoKcc> getTiposKCCs();
 
-    public TipoKCC guardar(TipoKCC tipoKCC);
+    public TipoKcc guardar(TipoKcc tipoKCC);
 
-    public boolean eliminar(TipoKCC tipoKCC);
+    public boolean eliminar(TipoKcc tipoKCC);
 
-    public KCC getKcc(Long id);
+    public Kcc getKcc(Long id);
 
-    public KCC getKcc(String carpeta);
+    public Kcc getKcc(String carpeta);
 
-    public List<KCC> getKccs();
+    public List<Kcc> getKccs();
 
-    public List<KCC> getKccs(String usuario);
+    public List<Kcc> getKccs(String usuario);
 
-    public List<KCC> getKccs(TipoKCC tipoKCC);
+    public List<Kcc> getKccs(TipoKcc tipoKCC);
 
-    public KCC guardar(KCC kcc);
+    public Kcc guardar(Kcc kcc);
 
-    public boolean eliminar(KCC kcc);
+    public boolean eliminar(Kcc kcc);
 }

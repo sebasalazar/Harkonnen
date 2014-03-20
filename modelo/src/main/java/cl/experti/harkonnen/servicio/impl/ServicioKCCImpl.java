@@ -1,9 +1,9 @@
 package cl.experti.harkonnen.servicio.impl;
 
-import cl.experti.harkonnen.modelo.KCC;
-import cl.experti.harkonnen.modelo.TipoKCC;
-import cl.experti.harkonnen.repository.KCCRepository;
-import cl.experti.harkonnen.repository.TipoKCCRepository;
+import cl.experti.harkonnen.modelo.Kcc;
+import cl.experti.harkonnen.modelo.TipoKcc;
+import cl.experti.harkonnen.repository.KccRepository;
+import cl.experti.harkonnen.repository.TipoKccRepository;
 import cl.experti.harkonnen.servicio.ServicioKCC;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,18 +22,18 @@ import org.springframework.stereotype.Service;
 @Service("servicioKCC")
 public class ServicioKCCImpl implements ServicioKCC, Serializable {
 
-    @Resource(name = "tipoKCCRepository")
-    private TipoKCCRepository tipoKCCRepository;
-    @Resource(name = "kCCRepository")
-    private KCCRepository kCCRepository;
+    @Resource(name = "tipoKccRepository")
+    private TipoKccRepository tipoKccRepository;
+    @Resource(name = "kccRepository")
+    private KccRepository kccRepository;
     private static final Logger logger = LoggerFactory.getLogger(ServicioKCCImpl.class);
 
     @Override
-    public TipoKCC getTipoKCC(Integer id) {
-        TipoKCC tipoKCC = null;
+    public TipoKcc getTipoKCC(Integer id) {
+        TipoKcc tipoKCC = null;
         try {
             if (id != null) {
-                tipoKCC = tipoKCCRepository.findOne(id);
+                tipoKCC = tipoKccRepository.findOne(id);
             }
         } catch (Exception e) {
             tipoKCC = null;
@@ -44,12 +44,12 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public List<TipoKCC> getTiposKCCs() {
-        List<TipoKCC> tiposKCCs = new ArrayList<TipoKCC>();
+    public List<TipoKcc> getTiposKCCs() {
+        List<TipoKcc> tiposKCCs = new ArrayList<TipoKcc>();
         try {
-            tiposKCCs = tipoKCCRepository.findAll();
+            tiposKCCs = tipoKccRepository.findAll();
         } catch (Exception e) {
-            tiposKCCs = new ArrayList<TipoKCC>();
+            tiposKCCs = new ArrayList<TipoKcc>();
             logger.error("Error al obtener tipos de KCC: {}", e.toString());
             logger.error("Error al obtener tipos de KCC: ", e);
         }
@@ -58,11 +58,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
 
     @Override
     @Transactional
-    public TipoKCC guardar(TipoKCC tipoKCC) {
-        TipoKCC salida = null;
+    public TipoKcc guardar(TipoKcc tipoKCC) {
+        TipoKcc salida = null;
         try {
             if (tipoKCC != null) {
-                salida = tipoKCCRepository.save(tipoKCC);
+                salida = tipoKccRepository.save(tipoKCC);
                 if (salida != null) {
                     logger.info("TipoKCC persistido con id {}", salida.getId());
                 }
@@ -77,11 +77,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
 
     @Override
     @Transactional
-    public boolean eliminar(TipoKCC tipoKCC) {
+    public boolean eliminar(TipoKcc tipoKCC) {
         boolean resultado = false;
         try {
             if (tipoKCC != null) {
-                tipoKCCRepository.delete(tipoKCC);
+                tipoKccRepository.delete(tipoKCC);
                 resultado = true;
             }
         } catch (Exception e) {
@@ -93,11 +93,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public KCC getKcc(Long id) {
-        KCC kcc = null;
+    public Kcc getKcc(Long id) {
+        Kcc kcc = null;
         try {
             if (id != null) {
-                kcc = kCCRepository.findOne(id);
+                kcc = kccRepository.findOne(id);
             }
         } catch (Exception e) {
             kcc = null;
@@ -108,11 +108,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public KCC getKcc(String carpeta) {
-        KCC kcc = null;
+    public Kcc getKcc(String carpeta) {
+        Kcc kcc = null;
         try {
             if (StringUtils.isNotBlank(carpeta)) {
-                kcc = kCCRepository.findByCarpetaIgnoreCase(carpeta);
+                kcc = kccRepository.findByCarpetaIgnoreCase(carpeta);
             }
         } catch (Exception e) {
             kcc = null;
@@ -123,10 +123,10 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public List<KCC> getKccs() {
-        List<KCC> kccs = new ArrayList<KCC>();
+    public List<Kcc> getKccs() {
+        List<Kcc> kccs = new ArrayList<Kcc>();
         try {
-            kccs = kCCRepository.findAll();
+            kccs = kccRepository.findAll();
         } catch (Exception e) {
             logger.error("Error al obtener KCCs: {}", e.toString());
             logger.debug("Error al obtener KCCs: ", e);
@@ -135,10 +135,10 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public List<KCC> getKccs(String usuario) {
-        List<KCC> kccs = new ArrayList<KCC>();
+    public List<Kcc> getKccs(String usuario) {
+        List<Kcc> kccs = new ArrayList<Kcc>();
         try {
-            kccs = kCCRepository.findAll();
+            kccs = kccRepository.findAll();
         } catch (Exception e) {
             logger.error("Error al obtener KCCs: {}", e.toString());
             logger.debug("Error al obtener KCCs: ", e);
@@ -147,11 +147,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
-    public List<KCC> getKccs(TipoKCC tipoKCC) {
-        List<KCC> kccs = new ArrayList<KCC>();
+    public List<Kcc> getKccs(TipoKcc tipoKCC) {
+        List<Kcc> kccs = new ArrayList<Kcc>();
         try {
             if (tipoKCC != null) {
-                kccs = kCCRepository.findByTipoKCC(tipoKCC);
+                kccs = kccRepository.findByTipoKCC(tipoKCC);
             }
         } catch (Exception e) {
             logger.error("Error al obtener KCCs: {}", e.toString());
@@ -162,11 +162,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
 
     @Override
     @Transactional
-    public KCC guardar(KCC kcc) {
-        KCC salida = null;
+    public Kcc guardar(Kcc kcc) {
+        Kcc salida = null;
         try {
             if (kcc != null) {
-                salida = kCCRepository.save(kcc);
+                salida = kccRepository.save(kcc);
                 if (salida != null) {
                     logger.info("KCC persistido con id {}", salida.getId());
                 }
@@ -181,11 +181,11 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
 
     @Override
     @Transactional
-    public boolean eliminar(KCC kcc) {
+    public boolean eliminar(Kcc kcc) {
         boolean resultado = false;
         try {
             if (kcc != null) {
-                kCCRepository.delete(kcc);
+                kccRepository.delete(kcc);
                 resultado = true;
             }
         } catch (Exception e) {

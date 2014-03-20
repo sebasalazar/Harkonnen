@@ -24,10 +24,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons.codec.version>1.9</commons.codec.version>
         <commons.io.version>2.4</commons.io.version>
-        <gson.version>2.2.4</gson.version>
-        <jsch.version>0.1.50</jsch.version>
-        <redmine.java.api.version>1.21</redmine.java.api.version>
-        <quartz.version>1.8.6</quartz.version>
     </properties>
 
     <build>
@@ -181,20 +177,6 @@
             <artifactId>commons-io</artifactId>
             <version>${commons.io.version}</version>
             <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>${gson.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        
-        <!-- SSH -->
-        <dependency>
-            <groupId>com.jcraft</groupId>
-            <artifactId>jsch</artifactId>
-            <version>${jsch.version}</version>
         </dependency>
     </dependencies>
 </project>

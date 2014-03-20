@@ -1,18 +1,22 @@
 package cl.experti.harkonnen.modelo;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Sebastián Salazar Molina <ssalazar@experti.cl>
  */
-public class KCC extends BaseBean {
+@Entity
+@Table(name = "kcc")
+public class Kcc extends BaseBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +24,9 @@ public class KCC extends BaseBean {
     private Long id = null;
     @Column(name = "usuario", nullable = false)
     private String usuario = null;
-    @JoinColumn(name = "tipo_kcc_fk", referencedColumnName = "pk", nullable = false)
+    @JoinColumn(name = "tipos_kcc_fk", referencedColumnName = "pk", nullable = false)
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private TipoKCC tipoKCC = null;
+    private TipoKcc tipoKCC = null;
     @Column(name = "carpeta", unique = true)
     private String carpeta = null;
     @Column(name = "medcom")
@@ -35,8 +39,8 @@ public class KCC extends BaseBean {
     private String serverCom = "201.238.207.132";
     @Column(name = "portcom")
     private Integer portCom = 80;
-    @Column(name = "whilelistcom")
-    private String whileListCom = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._-:=?/~";
+    @Column(name = "whitelistcom")
+    private String whiteListCom = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._-:=?/~";
     @Column(name = "host")
     private String host = null;
     @Column(name = "wport")
@@ -70,11 +74,11 @@ public class KCC extends BaseBean {
         this.usuario = usuario;
     }
 
-    public TipoKCC getTipoKCC() {
+    public TipoKcc getTipoKCC() {
         return tipoKCC;
     }
 
-    public void setTipoKCC(TipoKCC tipoKCC) {
+    public void setTipoKCC(TipoKcc tipoKCC) {
         this.tipoKCC = tipoKCC;
     }
 
@@ -126,12 +130,12 @@ public class KCC extends BaseBean {
         this.portCom = portCom;
     }
 
-    public String getWhileListCom() {
-        return whileListCom;
+    public String getWhiteListCom() {
+        return whiteListCom;
     }
 
-    public void setWhileListCom(String whileListCom) {
-        this.whileListCom = whileListCom;
+    public void setWhiteListCom(String whiteListCom) {
+        this.whiteListCom = whiteListCom;
     }
 
     public String getHost() {
