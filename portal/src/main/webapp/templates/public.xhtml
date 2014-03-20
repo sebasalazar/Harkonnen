@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:loadBundle basename="messages" var="msg" />
+
+    <f:view contentType="text/html" encoding="UTF-8">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta charset="utf-8" />
+            <meta name="description" content="Sistema Harkonnen" />
+            <meta name="author" content="Sebastián Salazar Molina." />
+            <meta name="robots" content="all" />
+            <meta http-equiv="Content-Language" content="es" />
+            <meta name="copyright" content="sebastian@sebastian.cl" />
+            <meta name="Reply-to" content="sebastian@sebastian.cl" />
+
+            <title>${msg.siteTitle}</title>
+        </h:head>
+
+        <h:body>
+
+            <h:form id="menuBar">
+                <!-- 
+                Iconos disponibles
+                http://api.jqueryui.com/theming/icons/
+                -->
+                <p:menubar>
+                    <p:menuitem value="${msg.indexLabel}" icon="ui-icon-home" url="/pages/index.jsf" update=":menuBar" />
+                </p:menubar>
+            </h:form>
+
+
+            <p:outputPanel id="harkonnenPanel" layout="block">
+                <ui:insert name="body" />
+            </p:outputPanel>
+
+        </h:body>
+
+    </f:view>
+</html>

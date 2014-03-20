@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+       xmlns:http="http://cxf.apache.org/transports/http/configuration"
+       xmlns:wssec="http://cxf.apache.org/configuration/security"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx" 
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+    <bean id="rootPlaceholderConfigPortal"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="systemPropertiesMode" value="2" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath:harkonnen-portal.properties</value>
+                <value>file:${user.home}${file.separator}.harkonnen${file.separator}harkonnen.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <context:annotation-config />
+    <context:component-scan base-package="cl.experti.harkonnen.portal" />
+
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="cl.experti.harkonnen.portal.jsf.ViewScope" />
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+
+    <!-- Spring Security 3.2 -->
+    <security:http pattern="/css/**" security="none" />
+    <security:http pattern="/js/**" security="none" />
+    <security:http pattern="/img/**" security="none" />
+    <security:http pattern="/javax.faces.resource/**" security="none" />
+    <security:http pattern="/pages/login.jsf" security="none"  />
+    <security:http pattern="/pages/acerca.jsf" security="none"  />
+    <security:http pattern="/pages/contacto.jsf" security="none"  />
+    <security:http pattern="/error/error.jsf" security="none"  />
+    <security:http pattern="/error/notfound.jsf" security="none"  />
+    <security:http pattern="/error/forbidden.jsf" security="none"  />
+    
+    <security:http use-expressions="true" auto-config="true">
+        <!-- Seguros -->
+        <security:intercept-url pattern="/pages/confirmar.jsf" access="hasRole('ROLE_VALIDO')" />
+        <security:intercept-url pattern="/pages/usuario.jsf" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/pages/servicio.jsf" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/pages/acceso.jsf" access="hasRole('ROLE_ADMIN')" />
+        <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
+        <security:logout logout-url="/j_spring_security_logout" />
+
+        <security:form-login login-page="/pages/login.jsf" login-processing-url="/j_spring_security_check"
+                             default-target-url="/pages/index.jsf" authentication-failure-url="/pages/login.jsf" />
+    </security:http>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="harkonnenAuthenticationProvider" />
+    </security:authentication-manager>
+    
+    <!--<security:debug />-->
+</beans>

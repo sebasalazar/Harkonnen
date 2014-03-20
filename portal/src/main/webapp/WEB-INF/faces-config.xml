@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+
+    <application>
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+        <message-bundle>
+            messages
+        </message-bundle>
+        <locale-config>
+            <default-locale>es</default-locale>
+            <!--
+                        <supported-locale>es</supported-locale>
+                        <supported-locale>en</supported-locale>
+            -->
+        </locale-config>
+    </application>
+
+    <!-- Reglas de Navegación -->
+    <navigation-rule>
+	<navigation-case>
+            <from-action>#{indexBean.pedirCuenta}</from-action>
+            <from-outcome>peticion</from-outcome>
+            <to-view-id>/pages/peticion.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{indexBean.miCuenta}</from-action>
+            <from-outcome>miCuenta</from-outcome>
+            <to-view-id>/pages/micuenta.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{indexBean.misDatos}</from-action>
+            <from-outcome>misDatosDocente</from-outcome>
+            <to-view-id>/pages/docente.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{indexBean.misDatos}</from-action>
+            <from-outcome>misDatosEstudiante</from-outcome>
+            <to-view-id>/pages/estudiante.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-action>#{peticionBean.procesarSolicitud}</from-action>
+            <from-outcome>peticionExitosa</from-outcome>
+            <to-view-id>/pages/peticion_exitosa.jsf</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-view-id>*</from-view-id>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/pages/error.jsf</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Convertidores -->
+    <converter id="BaseBeanConverter">
+        <converter-id>BaseBeanConverter</converter-id>
+        <converter-class>cl.experti.harkonnen.portal.converter.BaseBeanConverter</converter-class>
+    </converter>
+    
+    <converter id="SiNoConverter">
+        <converter-id>SiNoConverter</converter-id>
+        <converter-class>cl.experti.harkonnen.portal.converter.SiNoConverter</converter-class>
+    </converter>
+
+    <converter id="TrimConverter">
+        <converter-id>TrimConverter</converter-id>
+        <converter-class>cl.experti.harkonnen.portal.converter.TrimConverter</converter-class>
+    </converter>
+
+    <converter id="FechaConverter">
+        <converter-id>FechaConverter</converter-id>
+        <converter-class>cl.experti.harkonnen.portal.converter.FechaConverter</converter-class>
+    </converter>
+    
+    <converter id="FechaCompletaConverter">
+        <converter-id>FechaCompletaConverter</converter-id>
+        <converter-class>cl.experti.harkonnen.portal.converter.FechaCompletaConverter</converter-class>
+    </converter>
+
+
+</faces-config>

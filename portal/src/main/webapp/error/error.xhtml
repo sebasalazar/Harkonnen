@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/templates/fail.xhtml">
+        <ui:define name="body">
+
+            <p:outputPanel id="generalError" layout="block">
+                <p:panel header="${msg.tituloError}" footer="${failBean.generado}">
+                    <h:panelGrid columns="2" columnClasses="errorIzq, errorDer" style="border: none;">
+                        <p:panel header="${msg.errorServidor}">
+                            <h:outputText style="font-size: 13px;" value="${msg.mensajeError}" />
+                        </p:panel>
+
+                        <p:graphicImage alt="${msg.tituloError}" title="${msg.tituloError}" url="/img/Error500.png" />
+                    </h:panelGrid>
+                </p:panel>
+            </p:outputPanel>
+
+        </ui:define>
+    </ui:composition>
+</html>
