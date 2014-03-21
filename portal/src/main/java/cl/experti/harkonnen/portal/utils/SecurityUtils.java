@@ -10,13 +10,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * 
+ *
  * @author Sebastián Salazar Molina <sebasalazar@gmail.com>
  */
 public abstract class SecurityUtils implements Serializable {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(SecurityUtils.class);
-    
+
     public static Integer getRemoteUser() {
         Integer remoteUser = null;
         try {
@@ -27,7 +27,7 @@ public abstract class SecurityUtils implements Serializable {
         }
         return remoteUser;
     }
-    
+
     public static boolean isUserInRole(String role) {
         boolean resultado = false;
         try {
@@ -39,7 +39,7 @@ public abstract class SecurityUtils implements Serializable {
         }
         return resultado;
     }
-    
+
     public static String sha256(String texto) {
         String resultado = "";
         try {
@@ -51,7 +51,7 @@ public abstract class SecurityUtils implements Serializable {
         }
         return resultado;
     }
-    
+
     public static String sha1(String texto) {
         String resultado = "";
         try {
@@ -63,12 +63,11 @@ public abstract class SecurityUtils implements Serializable {
         }
         return resultado;
     }
-    
-    public static String digestMd5(String texto) {
+
+    public static String md5(String texto) {
         String resultado = "";
         try {
             if (!StringUtils.isEmpty(texto)) {
-                byte[] md5 = DigestUtils.md5(texto);
                 resultado = DigestUtils.md5Hex(texto);
             }
         } catch (Exception e) {

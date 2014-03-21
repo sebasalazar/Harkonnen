@@ -30,7 +30,7 @@ public class ServicioAutenticacionImpl implements ServicioAutenticacion, Seriali
 
     @Override
     public boolean autenticar(String usuario, String password) {
-        String contrasena = SecurityUtils.digestMd5(password);
+        String contrasena = SecurityUtils.md5(password);
         return servicioAcceso.autenticar(usuario, contrasena);
     }
 

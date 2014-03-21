@@ -5,6 +5,7 @@ import cl.experti.harkonnen.modelo.Acceso;
 import cl.experti.harkonnen.modelo.Usuario;
 import cl.experti.harkonnen.repository.AccesoRepository;
 import cl.experti.harkonnen.servicio.ServicioAcceso;
+import cl.experti.harkonnen.utils.HarkonnenUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +113,8 @@ public class ServicioAccesoImpl implements ServicioAcceso, Serializable {
             if (StringUtils.isNotBlank(usuario)) {
                 Usuario empleado = usuarioRepository.findByUsuario(usuario);
                 if (empleado != null) {
-                    resultado = StringUtils.equals(password, empleado.getPassword());
+                    String hash = HarkonnenUtils.ldapPasswordHash(empleado.getPassword());
+                    resultado = StringUtils.equals(password, hash);
                 }
             }
         } catch (Exception e) {

@@ -2,14 +2,11 @@ package cl.experti.harkonnen.portal.jsf;
 
 import cl.experti.harkonnen.portal.servicio.ServicioAutenticacion;
 import cl.experti.harkonnen.portal.utils.FacesUtils;
-import cl.experti.harkonnen.servicio.ServicioAcceso;
-import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.Resource;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import org.slf4j.Logger;
@@ -23,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Sebastián Salazar Molina <ssalazar@orangepeople.cl>
  */
 @Component
-@Scope("view")
+@Scope("request")
 @Qualifier("loginBean")
 public class LoginBean implements Serializable {
 
@@ -49,7 +46,7 @@ public class LoginBean implements Serializable {
         this.username = username;
     }
 
-    public String doLogin() throws IOException, ServletException {
+    public String doLogin() {
         String resultado = null;
 
         try {

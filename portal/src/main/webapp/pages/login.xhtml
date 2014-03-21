@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
@@ -12,13 +11,13 @@
                 <p:panel header="${msg.tituloLogin}">
                     <h:panelGrid columns="3" style="border: none;">
 
-                        <p:outputLabel for="usuario" value="${msg.usuarioLabel}" />
-                        <p:inputText id="usuario" value="#{loginBean.username}" />
-                        <p:message for="usuario" />
+                        <p:outputLabel for="j_username" value="${msg.usuarioLabel}" />
+                        <p:inputText id="j_username" value="#{loginBean.username}" converter="TrimConverter" />
+                        <p:message for="j_username" />
 
-                        <p:outputLabel for="password" value="${msg.passwordLabel}" />
-                        <p:password id="password" value="#{loginBean.password}" />
-                        <p:message for="password" />
+                        <p:outputLabel for="j_password" value="${msg.passwordLabel}" />
+                        <p:password id="j_password" value="#{loginBean.password}" converter="TrimConverter" />
+                        <p:message for="j_password" />
 
                     </h:panelGrid>
 
@@ -26,7 +25,8 @@
 
                     <p:separator />
 
-                    <p:commandButton action="#{loginBean.doLogin}" value="${msg.loginLabel}" ajax="false" />
+                    <p:commandButton action="#{loginBean.doLogin}" value="${msg.loginLabel}" 
+                                     ajax="false" />
 
                 </p:panel>
             </h:form>
