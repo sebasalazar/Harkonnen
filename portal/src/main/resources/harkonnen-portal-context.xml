@@ -45,11 +45,11 @@
 
 
     <!-- Spring Security 3.2 -->
-    <security:http pattern="/resources/css/**" security="none" />
+<!--    <security:http pattern="/resources/css/**" security="none" />
     <security:http pattern="/resources/js/**" security="none" />
-    <security:http pattern="/resources/img/**" security="none" />
+    <security:http pattern="/resources/img/**" security="none" />-->
     <security:http pattern="/javax.faces.resource/**" security="none" />
-    <security:http pattern="/pages/login.jsf" security="none"  />
+    <security:http pattern="/pages/login.jsf*" security="none"  />
     <security:http pattern="/error/error.jsf" security="none"  />
     <security:http pattern="/error/notfound.jsf" security="none"  />
     <security:http pattern="/error/forbidden.jsf" security="none"  />
@@ -60,6 +60,8 @@
         <security:logout logout-url="/j_spring_security_logout" />
 
         <security:form-login login-page="/pages/login.jsf" 
+                             username-parameter="usuario"
+                             password-parameter="password"
                              login-processing-url="/j_spring_security_check"
                              authentication-failure-url="/pages/login.jsf"
                              default-target-url="/pages/index.jsf" />

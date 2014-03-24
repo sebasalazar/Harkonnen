@@ -1,6 +1,7 @@
 package cl.experti.harkonnen.portal.security;
 
 import cl.experti.harkonnen.portal.servicio.ServicioAutenticacion;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 @Service("harkonnenAuthenticationProvider")
-public class HarkonnenAuthenticationProvider implements AuthenticationProvider {
+public class HarkonnenAuthenticationProvider implements AuthenticationProvider, Serializable {
 
     @Resource(name = "servicioAutenticacion")
     private ServicioAutenticacion servicioAutenticacion;

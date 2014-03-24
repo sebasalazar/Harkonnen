@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @author Sebastián Salazar Molina <ssalazar@orangepeople.cl>
  */
 @Component
-@Scope("request")
+@Scope("view")
 @Qualifier("loginBean")
 public class LoginBean implements Serializable {
 
@@ -53,9 +53,7 @@ public class LoginBean implements Serializable {
             boolean ok = servicioAutenticacion.autenticar(username, password);
             if (ok) {
                 ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-
-                RequestDispatcher dispatcher = null;
-                dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
+                RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
                 dispatcher.forward((ServletRequest) context.getRequest(),
                         (ServletResponse) context.getResponse());
 

@@ -11,13 +11,13 @@
                 <p:panel header="${msg.tituloLogin}">
                     <h:panelGrid columns="3" style="border: none;">
 
-                        <p:outputLabel for="j_username" value="${msg.usuarioLabel}" />
-                        <p:inputText id="j_username" value="#{loginBean.username}" converter="TrimConverter" />
-                        <p:message for="j_username" />
+                        <p:outputLabel for="usuario" value="${msg.usuarioLabel}" />
+                        <p:inputText id="usuario" value="#{loginBean.username}" converter="TrimConverter" />
+                        <p:message for="usuario" />
 
-                        <p:outputLabel for="j_password" value="${msg.passwordLabel}" />
-                        <p:password id="j_password" value="#{loginBean.password}" converter="TrimConverter" />
-                        <p:message for="j_password" />
+                        <p:outputLabel for="password" value="${msg.passwordLabel}" />
+                        <p:password id="password" value="#{loginBean.password}" converter="TrimConverter" />
+                        <p:message for="password" />
 
                     </h:panelGrid>
 
