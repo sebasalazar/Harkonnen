@@ -17,12 +17,12 @@ public abstract class SecurityUtils implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityUtils.class);
 
-    public static Integer getRemoteUser() {
-        Integer remoteUser = null;
+    public static String getRemoteUser() {
+        String remoteUser = null;
         try {
-            remoteUser = Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName());
+            remoteUser = StringUtils.lowerCase(SecurityContextHolder.getContext().getAuthentication().getName());
         } catch (Exception e) {
-            remoteUser = null;
+            remoteUser = "";
             logger.error(e.toString());
         }
         return remoteUser;

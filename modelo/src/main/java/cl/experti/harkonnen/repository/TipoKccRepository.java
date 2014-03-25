@@ -11,4 +11,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Resource(name = "tipoKccRepository")
 public interface TipoKccRepository extends JpaRepository<TipoKcc, Integer> {
 
+    public TipoKcc findByTipoIgnoreCase(String tipo);
 }

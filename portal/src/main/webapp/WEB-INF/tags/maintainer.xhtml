@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:harkonnen="http://harkonnen.experti.cl/jsf"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:component>
+
+        <f:loadBundle basename="messages" var="msg" />
+
+
+        <p:ajaxStatus onstart="ajaxDialog${idMaintainer}.show();" onsuccess="ajaxDialog${idMaintainer}.hide();"/>  
+        <p:dialog modal="true" widgetVar="ajaxDialog${idMaintainer}" header="${msg.procesandoLabel}" 
+                  draggable="false" closable="false">
+            <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />  
+        </p:dialog>
+
+
+        <p:outputPanel rendered="${(not empty rendered) ? rendered : true}">
+                <p:panel styleClass="panelNoBorder" header="${titulo}">
+
+                    <br/>
+                    <!-- Formulario de agregar/editar -->
+                    <p:outputPanel id="panelMantenedorSuperior${idMaintainer}">
+                        <p:outputPanel  rendered="${ (not empty agregar) ? (agregar || beanMaintainer.edicion) : true}">
+                            <table width="100%">
+                                <tr>
+                                    <td align="center">
+                                        <p:panel id="formEditPanel${idMaintainer}" header="${beanMaintainer.edicion ? tituloEdicion : tituloNuevo}" style="${style}">
+                                            <h:form id="formEdit${idMaintainer}">
+                                                <ui:insert />
+                                                <table width="50%">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <p:commandButton id="save${idMaintainer}" value="${msg.guardarLabel}" ajax="true"
+                                                                             action="${beanMaintainer.guardar}" icon="ui-icon-disk"
+                                                                             update=":panelMantenedorSuperior${idMaintainer}, :mensaje${idMaintainer}, :panel${idMaintainer}">
+                                                                <ui:insert name="customSave" />
+                                                            </p:commandButton>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </h:form>
+                                        </p:panel>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:outputPanel>
+                    </p:outputPanel>
+
+                    <table width="100%">
+                        <tr>
+                            <td align="center">
+                                <p:outputPanel id="mensaje${idMaintainer}">
+                                    <p:messages globalOnly="true" />
+                                </p:outputPanel>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- Listado de ocurrencias de una entidad -->
+
+                    <table width="100%">
+                        <tr>
+                            <td align="center">
+
+                                <p:outputPanel id="panel${idMaintainer}">
+                                    <h:form id="formTable${idMaintainer}">
+
+                                        <p:dataTable paginatorPosition="bottom" id="tablelist${idMaintainer}" value="${beanMaintainer.datos}"
+                                                     var="filaActual" rows="20" paginator="true" paginatorAlwaysVisible="false"
+                                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                                     emptyMessage="${msg.sinDatos}">
+
+                                            <ui:insert name="columnas" />
+
+                                            <p:column rendered="${(not empty editar) ? editar : true}">
+                                                <f:facet name="header">
+                                                    <h:graphicImage width="12" value="/img/edit.png" style="border: none;" alt="${msg.editarLabel}" />
+                                                </f:facet>
+
+                                                <p:commandLink id="linkEdit${idMaintainer}" update=":panelMantenedorSuperior${idMaintainer}, :formEdit${idMaintainer}">
+                                                    <h:graphicImage width="12" value="/img/edit.png" style="border:0" alt="${msg.editarLabel}" />
+                                                    <ui:insert name="editActionListener" />
+                                                    <f:setPropertyActionListener value="${filaActual}"
+                                                                                 target="${beanMaintainer.seleccionado}" />
+                                                    <f:setPropertyActionListener value="${true}"
+                                                                                 target="${beanMaintainer.edicion}" />
+                                                </p:commandLink>
+
+                                            </p:column>
+
+                                            <p:column rendered="${(not empty eliminar) ? eliminar : true}">
+                                                <f:facet name="header">
+                                                    <h:graphicImage width="13" value="/img/delete.png" style="border:0" alt="${msg.eliminarLabel}" />
+                                                </f:facet>
+                                                <p:commandLink id="linkDelete${idMaintainer}"
+                                                               oncomplete="popupDelete${idMaintainer}.show()">
+                                                    <h:graphicImage width="13" value="/img/delete.png" style="border:0" alt="${msg.eliminarLabel}" />
+                                                    <f:setPropertyActionListener value="${filaActual}"
+                                                                                 target="${beanMaintainer.seleccionado}" />
+                                                </p:commandLink>
+
+                                            </p:column>
+
+                                        </p:dataTable>
+
+                                    </h:form>
+                                </p:outputPanel>
+                            </td>
+                        </tr>
+                    </table>
+
+                </p:panel>
+        </p:outputPanel>
+
+        <!-- PopUp de Eliminación -->
+
+        <harkonnen:popup idPopup="popupDelete${idMaintainer}" title="${msg.confirmarEliminar}">
+            <h:form id="formDelete${idMaintainer}">
+                <table width="100%">
+                    <tr>
+                        <td align="center" width="50%">
+                            <p:commandButton value="${msg.siLabel}"
+                                             action="${beanMaintainer.eliminar}"
+                                             oncomplete="popupDelete${idMaintainer}.hide();"
+                                             update=":panelMantenedorSuperior${idMaintainer}, :mensaje${idMaintainer}, :panel${idMaintainer}">
+                                <ui:insert name="deleteActionListener" />
+                            </p:commandButton>
+                        </td>
+                        <td align="center" width="50%">
+                            <p:commandButton value="${msg.noLabel}"
+                                             onclick="popupDelete${idMaintainer}.hide();
+                                                     return false;" />
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </harkonnen:popup>
+
+    </ui:component>
+
+</html>

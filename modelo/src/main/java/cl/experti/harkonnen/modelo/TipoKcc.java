@@ -19,6 +19,8 @@ public class TipoKcc extends BaseBean {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk", nullable = false)
     private Integer id = null;
+    @Column(name = "tipo", unique = true)
+    private String tipo = null;
     @Column(name = "codigo_comercio")
     private String codigoComercio = null;
     @Column(name = "tipo_comercio")
@@ -30,6 +32,14 @@ public class TipoKcc extends BaseBean {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getCodigoComercio() {

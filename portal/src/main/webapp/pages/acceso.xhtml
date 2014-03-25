@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="body">
+            <p:outputPanel id="accesoBean" layout="block">
+
+                <p:ajaxStatus onstart="PF('ajaxDialog').show();" onsuccess="PF('ajaxDialog').hide();"/>  
+                <p:dialog modal="true" widgetVar="ajaxDialog" header="${msg.procesandoLabel}" 
+                          draggable="false" closable="false">
+                    <p:graphicImage value="/resources/img/ajaxloadingbar.gif" />  
+                </p:dialog>
+
+                <h:form id="accesoForm">
+                    <p:panel header="${msg.accesoLabel}">
+
+                        <h:panelGrid id="panelUsuario" columns="3" style="border: none; padding: 15px;">
+                            <p:outputLabel for="usuario" value="${msg.usuarioLabel}" />
+                            <p:inputText id="usuario" value="#{accesoBean.usuario}" converter="TrimConverter">
+                                <p:ajax event="change" update="@this" />
+                            </p:inputText>
+                            <p:message for="usuario" />
+
+                            <p:outputLabel for="inicio" value="${msg.fechaInicioLabel}" />
+                            <p:calendar id="inicio" value="#{accesoBean.inicio}" 
+                                        required="true" lang="es" />
+                            <p:message for="inicio" />
+
+                            <p:outputLabel for="fin" value="${msg.fechaFinalLabel}" />
+                            <p:calendar id="fin" value="#{accesoBean.fin}" 
+                                        required="true" lang="es" />
+                            <p:message for="fin" />
+                        </h:panelGrid>
+
+                        <p:commandButton icon="ui-icon-search" value="${msg.enviarLabel}" 
+                                         action="#{accesoBean.buscar}" update=":accesoForm:panelUsuario, :accesoForm:panelDatos" />
+
+                        <p:outputPanel id="panelDatos" style="padding: 15px;">
+                            <p:dataTable var="fila" value="#{accesoBean.accesos}" 
+                                         paginatorPosition="bottom" rows="20" paginator="true" paginatorAlwaysVisible="false"
+                                         paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+                                         emptyMessage="${msg.sinDatos}">
+                                <p:column headerText="${msg.usuarioLabel}">
+                                    <h:outputText value="#{fila.usuario}" converter="TrimConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.fechaLabel}">
+                                    <h:outputText value="#{fila.fecha}" converter="FechaCompletaConverter" />
+                                </p:column>
+
+                                <p:column headerText="${msg.tipoLabel}" filterMatchMode="contains" filterBy="#{fila.tipo}" sortBy="#{fila.tipo}">
+                                    <h:outputText value="#{fila.tipo}" />
+                                </p:column>
+
+                                <p:column headerText="${msg.ipLabel}" filterMatchMode="contains" filterBy="#{fila.ip}" sortBy="#{fila.ip}">
+                                    <h:outputText value="#{fila.ip}" />
+                                </p:column>
+                            </p:dataTable>
+                        </p:outputPanel>
+                    </p:panel>
+                </h:form>
+            </p:outputPanel>
+
+        </ui:define>
+    </ui:composition>
+</html>

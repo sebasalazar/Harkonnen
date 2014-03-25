@@ -2,17 +2,22 @@ package cl.experti.harkonnen.portal.jsf;
 
 import cl.experti.harkonnen.portal.servicio.ServicioAutenticacion;
 import cl.experti.harkonnen.portal.utils.FacesUtils;
+import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.Resource;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -46,12 +51,17 @@ public class LoginBean implements Serializable {
         this.username = username;
     }
 
-    public String doLogin() {
+    public String doLogin() throws IOException, ServletException {
         String resultado = null;
 
         try {
             boolean ok = servicioAutenticacion.autenticar(username, password);
             if (ok) {
+                //@TODO @HACK TRUCHO, investigar porque falla
+                SecurityContext ctx = SecurityContextHolder.createEmptyContext();
+                SecurityContextHolder.setContext(ctx);
+                ctx.setAuthentication(new UsernamePasswordAuthenticationToken(username, password));
+
                 ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
                 RequestDispatcher dispatcher = ((ServletRequest) context.getRequest()).getRequestDispatcher("/j_spring_security_check");
                 dispatcher.forward((ServletRequest) context.getRequest(),

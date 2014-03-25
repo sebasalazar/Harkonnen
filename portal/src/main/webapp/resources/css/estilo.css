@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+.panelNoBorder {
+    border: none;
+}
+
+.negrita {
+    font-weight: bolder;
+}
+
+.noventa {
+    width: 90%;
+    vertical-align: middle;
+}
+
+.diez {
+    width: 10%;
+    vertical-align: middle;
+}
+
+.errorIzq {
+    vertical-align: middle;
+}
+
+.errorDer {
+    border: none;
+}

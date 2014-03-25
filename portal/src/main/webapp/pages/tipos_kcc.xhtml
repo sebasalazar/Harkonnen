@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:harkonnen="http://harkonnen.experti.cl/jsf"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:composition template="/templates/main.xhtml">
+        <ui:define name="body">
+            <p:outputPanel id="tipoBean" layout="block">
+
+                <harkonnen:maintainer
+                    beanMaintainer="#{tipoKccBean}"
+                    titulo="${msg.tituloTipoKcc}"
+                    tituloEdicion="${msg.editarLabel}"
+                    tituloNuevo="${msg.agregarLabel}">
+
+                    <h:panelGrid columns="2" styleClass="panelNoBorder">
+
+                        <harkonnen:inputtext inputTextId="tipo" label="${msg.tipoLabel}" 
+                                             value="#{tipoKccBean.seleccionado.tipo}" />
+
+                        <harkonnen:inputtext inputTextId="codigoComercio" label="${msg.codigoComercioLabel}"
+                                             value="#{tipoKccBean.seleccionado.codigoComercio}" />
+
+                        <harkonnen:inputtext inputTextId="tipoComercio" label="${msg.tipoComercioLabel}"
+                                             value="#{tipoKccBean.seleccionado.tipoComercio}" />
+                    </h:panelGrid>
+
+                    <ui:define name="columnas">
+                        <p:column headerText="${msg.idLabel}">
+                            <h:outputText value="#{filaActual.id}" />
+                        </p:column>
+
+                        <p:column headerText="${msg.tipoLabel}">
+                            <h:outputText value="#{filaActual.tipo}" />
+                        </p:column>
+
+                        <p:column headerText="${msg.codigoComercioLabel}">
+                            <h:outputText value="#{filaActual.codigoComercio}" />
+                        </p:column>
+
+                        <p:column headerText="${msg.tipoComercioLabel}">
+                            <h:outputText value="#{filaActual.tipoComercio}" />
+                        </p:column>
+
+                    </ui:define>
+
+                </harkonnen:maintainer>
+            </p:outputPanel>
+        </ui:define>
+    </ui:composition>
+</html>

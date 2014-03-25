@@ -8,8 +8,8 @@
         <ui:define name="body">
 
             <p:outputPanel id="ForbiddenError" layout="block">
-                <p:panel header="${msg.tituloForbidden}" footer="${failBean.generado}">
-                    <p:graphicImage id="sinPermiso" alt="${msg.tituloForbidden}" title="${msg.tituloForbidden}" url="/img/Error403.png" />
+                <p:panel header="${msg.tituloForbidden} :: ${msg.mensajeForbidden}" footer="#{failBean.generado}">
+                    <p:graphicImage id="sinPermiso" alt="${msg.tituloForbidden}" title="${msg.tituloForbidden}" url="/resources/img/Error403.png" />
 
                     <p:tooltip for="sinPermiso">
                         <p:panel header="${msg.tituloForbidden}">

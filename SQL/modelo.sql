@@ -15,11 +15,15 @@ CREATE TABLE accesos (
 DROP TABLE IF EXISTS tipos_kcc CASCADE;
 CREATE TABLE tipos_kcc (
     pk serial NOT NULL,
+    tipo varchar(255) NOT NULL,
     codigo_comercio varchar(255),
     tipo_comercio varchar(255),
+    UNIQUE (tipo),
     UNIQUE (codigo_comercio, tipo_comercio),
     PRIMARY KEY (pk)
 );
+INSERT INTO tipos_kcc (tipo, codigo_comercio, tipo_comercio) VALUES ('Normal','597026007976','HTML_TR_NORMAL');
+INSERT INTO tipos_kcc (tipo, codigo_comercio, tipo_comercio) VALUES ('Mall','597026008069','HTML_TR_MALL');
 
 
 DROP TABLE IF EXISTS kcc CASCADE;

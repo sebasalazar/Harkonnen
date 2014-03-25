@@ -20,31 +20,6 @@
 
     <!-- Reglas de Navegación -->
     <navigation-rule>
-	<navigation-case>
-            <from-action>#{indexBean.pedirCuenta}</from-action>
-            <from-outcome>peticion</from-outcome>
-            <to-view-id>/pages/peticion.jsf</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{indexBean.miCuenta}</from-action>
-            <from-outcome>miCuenta</from-outcome>
-            <to-view-id>/pages/micuenta.jsf</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{indexBean.misDatos}</from-action>
-            <from-outcome>misDatosDocente</from-outcome>
-            <to-view-id>/pages/docente.jsf</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{indexBean.misDatos}</from-action>
-            <from-outcome>misDatosEstudiante</from-outcome>
-            <to-view-id>/pages/estudiante.jsf</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-action>#{peticionBean.procesarSolicitud}</from-action>
-            <from-outcome>peticionExitosa</from-outcome>
-            <to-view-id>/pages/peticion_exitosa.jsf</to-view-id>
-        </navigation-case>
         <navigation-case>
             <from-view-id>*</from-view-id>
             <from-outcome>error</from-outcome>

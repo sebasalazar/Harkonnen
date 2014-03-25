@@ -12,6 +12,8 @@ public interface ServicioKCC {
 
     public TipoKcc getTipoKCC(Integer id);
 
+    public TipoKcc getTipoKCC(String tipo);
+
     public List<TipoKcc> getTiposKCCs();
 
     public TipoKcc guardar(TipoKcc tipoKCC);

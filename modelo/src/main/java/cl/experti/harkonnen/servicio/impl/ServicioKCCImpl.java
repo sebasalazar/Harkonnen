@@ -44,6 +44,21 @@ public class ServicioKCCImpl implements ServicioKCC, Serializable {
     }
 
     @Override
+    public TipoKcc getTipoKCC(String tipo) {
+        TipoKcc tipoKCC = null;
+        try {
+            if (StringUtils.isNotBlank(tipo)) {
+                tipoKCC = tipoKccRepository.findByTipoIgnoreCase(tipo);
+            }
+        } catch (Exception e) {
+            tipoKCC = null;
+            logger.error("Error al obtener tipo KCC: {}", e.toString());
+            logger.debug("Error al obtener tipo KCC: ", e);
+        }
+        return tipoKCC;
+    }
+
+    @Override
     public List<TipoKcc> getTiposKCCs() {
         List<TipoKcc> tiposKCCs = new ArrayList<TipoKcc>();
         try {

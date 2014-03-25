@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:component>
+
+        <c:set var="widthValue" value="${(empty width) ? 500 : width}" />
+        <c:set var="heightValue" value="${(empty height) ? 125 : height}" />
+
+        <p:dialog id="popup${idPopup}" width="${widthValue}" header="${title}" modal="true"
+                  widgetVar="${idPopup}" appendToBody="true" styleClass="dialogoPopUp">
+
+            <p:outputPanel id="panelPopup${idPopup}" style="height: ${heightValue}; color:#000; background-color: white;">
+                <p:outputPanel id="panelInner${idPopup}" rendered="${!(empty popupRendered) ? popupRendered : true}">
+                    <ui:insert />
+                </p:outputPanel>
+            </p:outputPanel>
+
+        </p:dialog>
+
+    </ui:component>
+</html>

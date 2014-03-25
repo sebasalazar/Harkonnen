@@ -8,6 +8,7 @@ import cl.experti.harkonnen.servicio.ServicioAcceso;
 import cl.experti.harkonnen.utils.HarkonnenUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
@@ -49,6 +50,21 @@ public class ServicioAccesoImpl implements ServicioAcceso, Serializable {
         try {
             if (StringUtils.isNotBlank(usuario)) {
                 accesos = accesoRepository.findByUsuario(usuario);
+            }
+        } catch (Exception e) {
+            accesos = new ArrayList<Acceso>();
+            logger.error("Error al obtener acceso: {}", e.toString());
+            logger.debug("Error al obtener acceso: {}", e.toString());
+        }
+        return accesos;
+    }
+
+    @Override
+    public List<Acceso> getAccesos(String usuario, Date inicio, Date fin) {
+        List<Acceso> accesos = new ArrayList<Acceso>();
+        try {
+            if (StringUtils.isNotBlank(usuario) && inicio != null && fin != null) {
+                accesos = accesoRepository.findByUsuarioAndFechaBetween(usuario, inicio, fin);
             }
         } catch (Exception e) {
             accesos = new ArrayList<Acceso>();

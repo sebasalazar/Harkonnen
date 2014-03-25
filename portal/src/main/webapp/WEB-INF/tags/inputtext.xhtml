@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:harkonnen="http://harkonnen.experti.cl/jsf">
+
+    <ui:composition>
+        <harkonnen:label text="${label}" componentId="${inputTextId}">
+
+            <c:set var="autocomplete" value="on" />
+            <c:if test="${! (not empty complete) ? complete : true}">
+                <c:set var="autocomplete" value="off" />
+            </c:if>
+
+            <p:inputText autocomplete="${autocomplete}" id="${inputTextId}" value="${value}" required="${required ? !empty required : false}"
+                         readonly="${(not empty readonly) ? readonly : false}" styleClass="${styleClass}"
+                         converter="TrimConverter">
+                <f:validateBean />
+
+                <ui:insert />
+            </p:inputText>
+        </harkonnen:label>
+    </ui:composition>
+</html>

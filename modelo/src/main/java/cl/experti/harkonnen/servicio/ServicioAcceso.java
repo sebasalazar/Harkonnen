@@ -1,6 +1,7 @@
 package cl.experti.harkonnen.servicio;
 
 import cl.experti.harkonnen.modelo.Acceso;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,11 +14,13 @@ public interface ServicioAcceso {
 
     public List<Acceso> getAccesos(String usuario);
 
+    public List<Acceso> getAccesos(String usuario, Date inicio, Date fin);
+
     public List<Acceso> getAccesos();
 
     public Acceso guardar(Acceso acceso);
 
     public boolean eliminar(Acceso acceso);
-    
+
     public boolean autenticar(String usuario, String password);
 }

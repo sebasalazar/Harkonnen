@@ -21,24 +21,32 @@
 
             <title>${msg.siteTitle}</title>
 
+            <h:outputStylesheet library="css" name="normalize.css" />
+
         </h:head>
 
         <h:body>
 
-            <h:form id="menuBar">
-                <!-- 
-                Iconos disponibles
-                http://api.jqueryui.com/theming/icons/
-                -->
-                <p:menubar>
-                    <p:menuitem value="${msg.indexLabel}" icon="ui-icon-home" url="/pages/index.jsf" update=":menuBar" />
-                </p:menubar>
-            </h:form>
+            <p:panel header="${msg.siteTitle}">
+                <h:form id="menuBar">
+                    <!-- 
+                    Iconos disponibles
+                    http://api.jqueryui.com/theming/icons/
+                    -->
+                    <p:menubar>
+                        <p:menuitem value="${msg.indexLabel}" icon="ui-icon-home" url="/pages/index.jsf" update=":menuBar" />
+                        <p:menuitem value="${msg.accesoLabel}" icon="ui-icon-clipboard" url="/pages/acceso.jsf" update=":menuBar" />
+                        <p:menuitem value="${msg.tipoLabel}" icon="ui-icon-tag" url="/pages/tipos_kcc.jsf" update=":menuBar" />
+                        <p:menuitem value="${msg.logoutLabel}" icon="ui-icon-closethick" url="/j_spring_security_logout" ajax="false" />
+                    </p:menubar>
+                </h:form>
 
+                <p:separator />
 
-            <p:outputPanel id="harkonnenPanel" layout="block">
-                <ui:insert name="body" />
-            </p:outputPanel>
+                <p:outputPanel id="harkonnenPanel" layout="block">
+                    <ui:insert name="body" />
+                </p:outputPanel>
+            </p:panel>
 
         </h:body>
 

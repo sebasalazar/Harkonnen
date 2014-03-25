@@ -45,19 +45,32 @@
 
 
     <!-- Spring Security 3.2 -->
-<!--    <security:http pattern="/resources/css/**" security="none" />
+    <!--
+    <security:http pattern="/resources/css/**" security="none" />
     <security:http pattern="/resources/js/**" security="none" />
-    <security:http pattern="/resources/img/**" security="none" />-->
+    <security:http pattern="/resources/img/**" security="none" />
+    -->
+    
     <security:http pattern="/javax.faces.resource/**" security="none" />
-    <security:http pattern="/pages/login.jsf*" security="none"  />
+    <security:http pattern="/resources/**" security="none" />
+    <!--    
+    <security:http pattern="/pages/login.jsf" security="none"  />
     <security:http pattern="/error/error.jsf" security="none"  />
     <security:http pattern="/error/notfound.jsf" security="none"  />
     <security:http pattern="/error/forbidden.jsf" security="none"  />
+    -->
     
     <security:http use-expressions="true" auto-config="true">
+        <!-- NO Seguros -->
+        <security:intercept-url pattern="/" access="isAnonymous()" />
+        <security:intercept-url pattern="/index.jsp" access="isAnonymous()" />
+        <security:intercept-url pattern="/pages/login.jsf" access="isAnonymous()" />
+        <security:intercept-url pattern="/error/error.jsf" access="isAnonymous()" />
+        <security:intercept-url pattern="/error/notfound.jsf" access="isAnonymous()" />
+        <security:intercept-url pattern="/error/forbidden.jsf" access="isAnonymous()" />
+    
         <!-- Seguros -->
         <security:intercept-url pattern="/**" access="isFullyAuthenticated()" />
-        <security:logout logout-url="/j_spring_security_logout" />
 
         <security:form-login login-page="/pages/login.jsf" 
                              username-parameter="usuario"
@@ -65,9 +78,11 @@
                              login-processing-url="/j_spring_security_check"
                              authentication-failure-url="/pages/login.jsf"
                              default-target-url="/pages/index.jsf" />
+
+        <security:logout logout-url="/j_spring_security_logout" delete-cookies="JSESSIONID" />
     </security:http>
 
-    <security:authentication-manager alias="authenticationManager">
+    <security:authentication-manager alias="AuthenticationManager">
         <security:authentication-provider ref="harkonnenAuthenticationProvider" />
     </security:authentication-manager>
     
